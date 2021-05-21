@@ -12,13 +12,52 @@ code {
     monospace;
 }
 
-.home {
+/* just simple css to know layout */
+
+.app {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  color: white;
-  background-color: #121212;
+}
+
+.auth-form {
+  width: 500px;
+  padding: 20px 25px;
+  max-width: 80%;
+  border: 1px solid #000;
+  background-color: #e6e6e6;
+}
+
+.auth-form button {
+  padding: 10px;
+  outline: none;
+  border: none;
+  color: #fff;
+  background-color: #030a24;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background-color: #b3b3b3;
+}
+
+.auth-link-container {
+  margin: 20px 0;
+}
+.auth-link {
+  display: inline;
+  margin-left: 5px;
+  color: #8c8c8c;
+  font-weight: bold;
+}
+.auth-link:hover {
+  color: #000;
+}
+
+.error {
+  color: #cd0000;
+  font-weight: 600;
 }
