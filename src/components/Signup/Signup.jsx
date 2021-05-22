@@ -3,17 +3,52 @@ import { useHistory } from 'react-router';
 import { Form, Formik } from 'formik';
 import { defaultValues, validationSchema } from './formikConfig';
 import { FormField } from 'components';
+import { fb } from 'service';
 
 export const Signup = () => {
   const history = useHistory();
   const [serverError, setServerError] = useState('');
 
-  const handleClick = () => {
+  const redirect = () => {
     history.push('login');
   };
 
   const signup = ({ email, userName, password }, { setSubmitting }) => {
-    console.log('Signing up: ', email, userName, password);
+    fb.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        if (res?.user?.uid) {
+          fetch('/api/createUser', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: res.user.uid,
+              userName: userName,
+            }),
+          }).then(() => {
+            fb.firestore
+              .collection('chatUsers')
+              .doc(res.user.uid)
+              .set({ userName, avatar: '' });
+          });
+        } else {
+          setServerError(
+            "We're having trouble signing you up. Please try again",
+          );
+        }
+      })
+      .catch(e => {
+        if (e.code === 'auth/email-already-in-use') {
+          setServerError('An account with this email already exist');
+        } else {
+          setServerError(
+            "We're having trouble signing you up. Please try again",
+          );
+        }
+      })
+      .finally(() => setSubmitting(false));
   };
 
   return (
@@ -38,7 +73,7 @@ export const Signup = () => {
 
             <div className="auth-link-container">
               Already have an account?
-              <p onClick={handleClick} className="auth-link">
+              <p onClick={redirect} className="auth-link">
                 Log In!
               </p>
             </div>
