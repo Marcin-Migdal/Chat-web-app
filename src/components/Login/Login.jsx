@@ -13,7 +13,7 @@ export const Login = () => {
     history.push('signup');
   };
 
-  const login = ({ email, password }, { setSubmittin }) => {
+  const login = ({ email, password }, { setSubmitting }) => {
     fb.auth
       .signInWithEmailAndPassword(email, password)
       .then(res => {
@@ -32,7 +32,7 @@ export const Login = () => {
           setServerError('Something went wrong');
         }
       })
-      .finally(() => setSubmittin(false));
+      .finally(() => setSubmitting(false));
   };
 
   return (

@@ -1,4 +1,5 @@
 import { Login, Signup, Chat } from 'components';
+import { ChatProvider } from 'context/ChatContext';
 import { useAuth } from 'hooks';
 import { useResolved } from 'hooks/useResolved';
 import { useEffect } from 'react';
@@ -17,11 +18,17 @@ export const App = () => {
 
   return (
     <div className="app">
-      <Switch>
-        <Chat exact path="/" component={Chat} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-      </Switch>
+      {authResolved ? (
+        <ChatProvider authUser={authUser}>
+          <Switch>
+            <Chat exact path="/" component={Chat} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+          </Switch>
+        </ChatProvider>
+      ) : (
+        <>Loading...</>
+      )}
     </div>
   );
 };
