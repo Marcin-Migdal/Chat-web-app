@@ -1,3 +1,45 @@
+import { useChat } from 'context/ChatContext';
+import { useEffect } from 'react';
+import { getChats, ChatEngine } from 'react-chat-engine';
+
 export const Chat = () => {
-  return <div>Chat</div>;
+  const { myChats, setMyChats, chatConfig, selectedChat } = useChat();
+
+  useEffect(() => {
+    console.log('My Chats: ', myChats);
+  }, [myChats]);
+
+  return (
+    <>
+      {!!chatConfig && (
+        <div style={{ display: 'none' }}>
+          <ChatEngine
+            userName={chatConfig.userName}
+            projectID={chatConfig.projectID}
+            userSecret={chatConfig.userSecret}
+            onConnect={() => {
+              getChats(chatConfig, setMyChats);
+            }}
+          />
+        </div>
+      )}
+
+      <div className="chat-container">
+        <div className="current-chat">
+          {selectedChat ? (
+            <></>
+          ) : (
+            <div className="no-chat-selected">
+              <img
+                src="/img/pointLeft.png"
+                className="point-left"
+                alt="point-left"
+              />
+              Select A Chat
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
 };

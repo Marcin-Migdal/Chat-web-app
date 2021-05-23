@@ -1,48 +1,31 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { deleteChat, getMessages, leaveChat, newChat } from 'react-chat-engine';
 import { fb } from 'service';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { newChat, leaveChat, deleteChat, getMessages } from 'react-chat-engine';
 
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children, authUser }) => {
   const [myChats, setMyChats] = useState();
-  const [chatConfing, setChatConfing] = useState();
+  const [chatConfig, setChatConfig] = useState();
   const [selectedChat, setSelectedChat] = useState();
 
-  useEffect(() => {
-    if (authUser) {
-      fb.firestore
-        .collection('chatUsers')
-        .doc(authUser.uid)
-        .onSnapshot(snap => {
-          setChatConfing({
-            userSecret: authUser.uid,
-            avatar: snap.data().avatar,
-            userName: snap.data().userName,
-            projectID: '12a69a14-5770-4cfe-88d1-9d4857c322e6',
-          });
-        });
-    }
-  }, [authUser]);
-
   const createChatClick = () => {
-    newChat(chatConfing, { title: '' });
+    newChat(chatConfig, { title: '' });
   };
-
   const deleteChatClick = chat => {
-    const isAdmin = chat.admin === chatConfing.userName;
+    const isAdmin = chat.admin === chatConfig.userName;
+
     if (
       isAdmin &&
       window.confirm('Are you sure you want to delete this chat?')
     ) {
-      deleteChat(chatConfing, chat.id);
+      deleteChat(chatConfig, chat.id);
     } else if (window.confirm('Are you sure you want to leave this chat?')) {
-      leaveChat(chatConfing, chat.id, chatConfing.userName);
+      leaveChat(chatConfig, chat.id, chatConfig.userName);
     }
   };
-
   const selectChatClick = chat => {
-    getMessages(chatConfing, chat.id, messages => {
+    getMessages(chatConfig, chat.id, messages => {
       setSelectedChat({
         ...chat,
         messages,
@@ -50,14 +33,30 @@ export const ChatProvider = ({ children, authUser }) => {
     });
   };
 
+  useEffect(() => {
+    if (authUser) {
+      fb.firestore
+        .collection('chatUsers')
+        .doc(authUser.uid)
+        .onSnapshot(snap => {
+          setChatConfig({
+            userSecret: authUser.uid,
+            avatar: snap.data().avatar,
+            userName: snap.data().userName,
+            projectID: '12a69a14-5770-4cfe-88d1-9d4857c322e6',
+          });
+        });
+    }
+  }, [authUser, setChatConfig]);
+
   return (
     <ChatContext.Provider
       value={{
         myChats,
         setMyChats,
-        chatConfing,
-        setChatConfing,
+        chatConfig,
         selectedChat,
+        setChatConfig,
         setSelectedChat,
         selectChatClick,
         deleteChatClick,
@@ -73,9 +72,9 @@ export const useChat = () => {
   const {
     myChats,
     setMyChats,
-    chatConfing,
-    setChatConfing,
+    chatConfig,
     selectedChat,
+    setChatConfig,
     setSelectedChat,
     selectChatClick,
     deleteChatClick,
@@ -85,9 +84,9 @@ export const useChat = () => {
   return {
     myChats,
     setMyChats,
-    chatConfing,
-    setChatConfing,
+    chatConfig,
     selectedChat,
+    setChatConfig,
     setSelectedChat,
     selectChatClick,
     deleteChatClick,
