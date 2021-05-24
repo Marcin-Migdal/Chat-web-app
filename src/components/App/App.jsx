@@ -1,8 +1,10 @@
-import { Login, Signup, Chat } from 'components';
-import { ChatProvider } from 'context/ChatContext';
 import { useAuth } from 'hooks';
-import { useResolved } from 'hooks/useResolved';
 import { useEffect } from 'react';
+import { useResolved } from 'hooks';
+import { ChatProvider } from 'context';
+import 'semantic-ui-css/semantic.min.css';
+import { Loader } from 'semantic-ui-react';
+import { Login, Signup, Chat } from 'components';
 import { Route, Switch, useHistory } from 'react-router-dom';
 
 export const App = () => {
@@ -27,7 +29,9 @@ export const App = () => {
           </Switch>
         </ChatProvider>
       ) : (
-        <>Loading...</>
+        <div className="loader-position">
+          <Loader active size="huge" />
+        </div>
       )}
     </div>
   );

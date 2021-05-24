@@ -1,0 +1,10 @@
+.chat-list-preview {
+  margin-left: 10px;
+}
+.preview-message {
+  font-size: 1.1rem;
+}
+.preview-username {
+  font-size: 1.2rem;
+  font-weight: 600;
+}

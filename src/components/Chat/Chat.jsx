@@ -1,16 +1,14 @@
-import { useChat } from 'context/ChatContext';
-import { useEffect } from 'react';
+import { useChat } from 'context';
+import { LeftRail } from 'components';
 import { getChats, ChatEngine } from 'react-chat-engine';
+import './Chat.css';
 
 export const Chat = () => {
-  const { myChats, setMyChats, chatConfig, selectedChat } = useChat();
-
-  useEffect(() => {
-    console.log('My Chats: ', myChats);
-  }, [myChats]);
+  const { setMyChats, chatConfig, selectedChat } = useChat();
 
   return (
     <>
+      <LeftRail />
       {!!chatConfig && (
         <div style={{ display: 'none' }}>
           <ChatEngine

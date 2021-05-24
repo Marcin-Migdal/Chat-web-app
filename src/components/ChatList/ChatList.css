@@ -1,0 +1,53 @@
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 75px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  transition: 0.25s;
+}
+.chat-list-item .selected,
+.chat-list-item:hover {
+  background-color: #e6e6e6;
+}
+.selected-chat-item {
+  background-color: #e6e6e6;
+}
+.chat-list-item-content {
+  flex: 1;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: flex-start;
+}
+.chat-list-item-content > i.icon {
+  margin: 0;
+}
+.chat-item-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  border-radius: 100%;
+  cursor: pointer;
+  visibility: hidden;
+}
+.chat-item-delete:hover {
+  background-color: #b8bbc6;
+}
+.chat-item-delete > i.icon {
+  margin: 0;
+}
+.chat-list-item:hover .chat-item-delete {
+  transition: 0.25s;
+  visibility: visible;
+}

@@ -13,14 +13,16 @@ export const ChatProvider = ({ children, authUser }) => {
     newChat(chatConfig, { title: '' });
   };
   const deleteChatClick = chat => {
-    const isAdmin = chat.admin === chatConfig.userName;
-
+    const isAdmin = chat.admin.username === chatConfig.userName;
     if (
       isAdmin &&
       window.confirm('Are you sure you want to delete this chat?')
     ) {
       deleteChat(chatConfig, chat.id);
-    } else if (window.confirm('Are you sure you want to leave this chat?')) {
+    } else if (
+      !isAdmin &&
+      window.confirm('Are you sure you want to leave this chat?')
+    ) {
       leaveChat(chatConfig, chat.id, chatConfig.userName);
     }
   };
@@ -55,8 +57,8 @@ export const ChatProvider = ({ children, authUser }) => {
         myChats,
         setMyChats,
         chatConfig,
-        selectedChat,
         setChatConfig,
+        selectedChat,
         setSelectedChat,
         selectChatClick,
         deleteChatClick,
@@ -73,8 +75,8 @@ export const useChat = () => {
     myChats,
     setMyChats,
     chatConfig,
-    selectedChat,
     setChatConfig,
+    selectedChat,
     setSelectedChat,
     selectChatClick,
     deleteChatClick,
@@ -85,8 +87,8 @@ export const useChat = () => {
     myChats,
     setMyChats,
     chatConfig,
-    selectedChat,
     setChatConfig,
+    selectedChat,
     setSelectedChat,
     selectChatClick,
     deleteChatClick,

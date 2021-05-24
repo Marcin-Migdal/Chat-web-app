@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { Form, Formik } from 'formik';
-import { defaultValues, validationSchema } from './formikConfig';
-import { FormField } from 'components';
 import { fb } from 'service';
+import { Form, Formik } from 'formik';
+import { FormField } from 'components';
 
+import { defaultValues, validationSchema } from './formikConfig';
 export const Signup = () => {
   const history = useHistory();
   const [serverError, setServerError] = useState('');

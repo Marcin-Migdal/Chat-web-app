@@ -1,8 +1,8 @@
-import { FormField } from 'components/FormField/FormField';
-import { Form, Formik } from 'formik';
 import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { fb } from 'service';
+import { FormField } from 'components';
+import { Form, Formik } from 'formik';
+import { useHistory } from 'react-router';
 import { defaultValues, validationSchema } from './formikConfig';
 
 export const Login = () => {
