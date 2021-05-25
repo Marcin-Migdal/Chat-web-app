@@ -7,3 +7,5 @@ export * from './LeftRail';
 export * from './ChatList';
 export * from './ChatAvatar';
 export * from './ChatListItemContent';
+export * from './ChatToolbar';
+export * from './SearchUsers';

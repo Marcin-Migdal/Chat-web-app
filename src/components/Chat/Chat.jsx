@@ -1,5 +1,5 @@
 import { useChat } from 'context';
-import { LeftRail } from 'components';
+import { LeftRail, ChatToolbar } from 'components';
 import { getChats, ChatEngine } from 'react-chat-engine';
 import './Chat.css';
 
@@ -25,7 +25,9 @@ export const Chat = () => {
       <div className="chat-container">
         <div className="current-chat">
           {selectedChat ? (
-            <></>
+            <div className="chat">
+              <ChatToolbar />
+            </div>
           ) : (
             <div className="no-chat-selected">
               <img

@@ -1,7 +1,7 @@
 .left-rail {
   height: 100%;
   width: 375px;
-  border: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
 .chat-list-container {
   overflow-y: auto;

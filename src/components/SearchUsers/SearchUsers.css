@@ -1,0 +1,10 @@
+.user-search .input {
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+}
+.user-search .input .prompt,
+.user-search .input .prompt:focus {
+  border: none;
+  outline: none;
+  border-radius: 0px !important;
+}
