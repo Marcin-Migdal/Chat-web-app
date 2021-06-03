@@ -9,3 +9,5 @@ export * from './ChatAvatar';
 export * from './ChatListItemContent';
 export * from './ChatToolbar';
 export * from './SearchUsers';
+export * from './ChatInput';
+export * from './MessageList';

@@ -27,7 +27,7 @@ export const ChatProvider = ({ children, authUser }) => {
     }
   };
   const selectChatClick = chat => {
-    getMessages(chatConfig, chat.id, messages => {
+    getMessages(chatConfig, chat.id, (chatId, messages) => {
       setSelectedChat({
         ...chat,
         messages,

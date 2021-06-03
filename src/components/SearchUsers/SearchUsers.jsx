@@ -22,10 +22,6 @@ export const SearchUsers = ({ visible, closeFunction }) => {
   }, [visible, selectedChat]);
 
   useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
-  useEffect(() => {
     setLoading(true);
     getOtherPeople(chatConfig, selectedChat.id, (chatId, data) => {
       if (debounceSearchTerm) {
@@ -52,7 +48,7 @@ export const SearchUsers = ({ visible, closeFunction }) => {
       };
 
       setSelectedChat(updatedChat);
-      setMyChats([...filteredChats, updatedChat]);
+      setMyChats([...filteredChats, updatedChat].sort((a, b) => b.id - a.id));
       closeFunction();
     });
   };
