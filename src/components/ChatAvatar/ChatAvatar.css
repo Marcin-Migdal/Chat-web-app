@@ -1,0 +1,16 @@
+.chat-list-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+}
+.empty-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  font-size: 36px;
+  color: #fff;
+  background-color: #0077e6;
+}

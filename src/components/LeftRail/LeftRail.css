@@ -1,0 +1,30 @@
+.left-rail {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 375px;
+  border-right: 1px solid lightgray;
+}
+.chat-list-container {
+  flex: 1;
+  overflow-y: auto;
+}
+.no-chats-yet {
+  padding: 15px;
+}
+.create-chat-button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  background-color: #1890ff;
+  transition: 0.25s;
+}
+.create-chat-button:hover {
+  background-color: #0077e6;
+}

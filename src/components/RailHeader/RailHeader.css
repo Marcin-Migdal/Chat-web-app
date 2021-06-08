@@ -1,0 +1,30 @@
+.sign-out {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+.left-rail-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 18px;
+  border-bottom: 1px solid lightgray;
+}
+.left-rail-header .empty-avatar {
+  width: 56px;
+  height: 56px;
+}
+.current-user-info {
+  display: flex;
+  align-items: center;
+}
+.current-username {
+  margin-left: 13px;
+  font-size: 25px;
+  font-weight: 600;
+}
+.user-avatar {
+  cursor: pointer;
+}
