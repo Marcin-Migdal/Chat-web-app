@@ -1,7 +1,7 @@
-import { useChat } from 'context';
-import { useResolved } from 'hooks';
-import { ChatList } from 'components';
+import { ChatList, RailHeader } from 'components';
 import { Loader } from 'semantic-ui-react';
+import { useResolved } from 'hooks';
+import { useChat } from 'context';
 import './LeftRail.css';
 
 export const LeftRail = () => {
@@ -10,6 +10,7 @@ export const LeftRail = () => {
 
   return (
     <div className="left-rail">
+      <RailHeader />
       {chatsResolved ? (
         <>
           {!!myChats.length ? (

@@ -11,3 +11,5 @@ export * from './ChatToolbar';
 export * from './SearchUsers';
 export * from './ChatInput';
 export * from './MessageList';
+export * from './ImageUpload';
+export * from './RailHeader';

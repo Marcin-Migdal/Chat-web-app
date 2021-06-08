@@ -1,9 +1,15 @@
 .chat-list-preview {
   margin-left: 10px;
 }
+
 .preview-message {
+  width: 225px;
   font-size: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .preview-username {
   font-size: 1.2rem;
   font-weight: 600;

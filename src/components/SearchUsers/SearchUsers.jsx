@@ -1,4 +1,5 @@
 import { useChat } from 'context';
+import { sortChats } from 'helpers';
 import { useDebounce } from 'hooks';
 import { useEffect, useRef, useState } from 'react';
 import { addPerson, getOtherPeople } from 'react-chat-engine';
@@ -48,7 +49,7 @@ export const SearchUsers = ({ visible, closeFunction }) => {
       };
 
       setSelectedChat(updatedChat);
-      setMyChats([...filteredChats, updatedChat].sort((a, b) => b.id - a.id));
+      setMyChats([...filteredChats, updatedChat].sort(sortChats));
       closeFunction();
     });
   };

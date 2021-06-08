@@ -22,11 +22,13 @@ export const ChatListItemContent = ({ username, chat }) => {
           {username ? username : 'No One Added Yet'}
         </div>
         {chat && (
-          <div className="preview-message">
+          <p className="preview-message">
             {chat.last_message.attachments.length
-              ? chat.last_message.sender.username + 'sent an attachment'
-              : chat.last_message.text.slice(0, 50) + '...'}
-          </div>
+              ? chat.last_message.sender.username + ' sent an attachment'
+              : chat.last_message.text.length
+              ? chat.last_message.text
+              : '...'}
+          </p>
         )}
       </div>
     </>

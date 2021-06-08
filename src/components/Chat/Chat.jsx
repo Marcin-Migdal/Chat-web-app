@@ -1,6 +1,7 @@
-import { useChat } from 'context';
 import { LeftRail, ChatToolbar, ChatInput, MessageList } from 'components';
 import { getChats, ChatEngine } from 'react-chat-engine';
+import { sortChats } from 'helpers';
+import { useChat } from 'context';
 import './Chat.css';
 
 export const Chat = () => {
@@ -13,14 +14,10 @@ export const Chat = () => {
     setSelectedChat,
   } = useChat();
 
-  const handleConnect = () => {
-    getChats(chatConfig, setMyChats);
-  };
-
   const handleNewChat = chat => {
     if (chat.admin.username === chatConfig.userName) {
       selectChatClick(chat);
-      setMyChats([...myChats, chat].sort((a, b) => b.id - a.id));
+      setMyChats([...myChats, chat].sort(sortChats));
     }
   };
 
@@ -29,9 +26,7 @@ export const Chat = () => {
       setSelectedChat(null);
     }
     setMyChats(
-      myChats
-        .filter(chat => chat.id !== deletedChat.id)
-        .sort((a, b) => b.id - a.id),
+      myChats.filter(chat => chat.id !== deletedChat.id).sort(sortChats),
     );
   };
 
@@ -48,7 +43,7 @@ export const Chat = () => {
       ...chatThatMessageBelongsTo,
       last_message: message,
     };
-    setMyChats([...filteredChats, updatedChat].sort((a, b) => b.id - a.id));
+    setMyChats([...filteredChats, updatedChat].sort(sortChats));
   };
 
   return (
@@ -60,12 +55,10 @@ export const Chat = () => {
             userName={chatConfig.userName}
             projectID={chatConfig.projectID}
             userSecret={chatConfig.userSecret}
-            onConnect={handleConnect}
+            onConnect={() => getChats(chatConfig, setMyChats)}
             onNewChat={chat => handleNewChat(chat)}
             onDeleteChat={deletedChat => handleDeleteChat(deletedChat)}
-            onNewMessage={(chatId, message) =>
-              handleNewMessage(chatId, message)
-            }
+            onNewMessage={(chatId, msg) => handleNewMessage(chatId, msg)}
           />
         </div>
       )}

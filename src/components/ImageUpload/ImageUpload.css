@@ -1,0 +1,30 @@
+.image-upload-actions {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.image-upload-actions button {
+  border: none;
+  padding: 10px;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.image-upload-actions .cancel {
+  background-color: #e60000;
+}
+
+.image-upload-actions .cancel:hover {
+  background-color: #b30000;
+}
+
+.image-upload-actions .submit {
+  background-color: #333333;
+}
+
+.image-upload-actions .submit:hover {
+  background-color: #0d0d0d;
+}

@@ -1,11 +1,13 @@
 .left-rail {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   width: 375px;
   border-right: 1px solid lightgray;
 }
 .chat-list-container {
+  flex: 1;
   overflow-y: auto;
-  height: calc(100% - 150px);
 }
 .no-chats-yet {
   padding: 15px;
