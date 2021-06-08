@@ -2,6 +2,7 @@ import { LeftRail, ChatToolbar, ChatInput, MessageList } from 'components';
 import { getChats, ChatEngine } from 'react-chat-engine';
 import { sortChats } from 'helpers';
 import { useChat } from 'context';
+import { useEffect } from 'react';
 import './Chat.css';
 
 export const Chat = () => {
@@ -9,10 +10,19 @@ export const Chat = () => {
     myChats,
     setMyChats,
     chatConfig,
+    setChatConfig,
     selectedChat,
     selectChatClick,
     setSelectedChat,
   } = useChat();
+
+  useEffect(() => {
+    return () => {
+      setMyChats();
+      setChatConfig();
+      setSelectedChat();
+    };
+  }, [setMyChats, setChatConfig, setSelectedChat]);
 
   const handleNewChat = chat => {
     if (chat.admin.username === chatConfig.userName) {

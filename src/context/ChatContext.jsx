@@ -12,6 +12,7 @@ export const ChatProvider = ({ children, authUser }) => {
   const createChatClick = () => {
     newChat(chatConfig, { title: '' });
   };
+
   const deleteChatClick = chat => {
     const isAdmin = chat.admin.username === chatConfig.userName;
     if (
@@ -26,6 +27,7 @@ export const ChatProvider = ({ children, authUser }) => {
       leaveChat(chatConfig, chat.id, chatConfig.userName);
     }
   };
+
   const selectChatClick = chat => {
     getMessages(chatConfig, chat.id, (chatId, messages) => {
       setSelectedChat({
@@ -41,12 +43,14 @@ export const ChatProvider = ({ children, authUser }) => {
         .collection('chatUsers')
         .doc(authUser.uid)
         .onSnapshot(snap => {
-          setChatConfig({
-            userSecret: authUser.uid,
-            avatar: snap.data().avatar,
-            userName: snap.data().userName,
-            projectID: '12a69a14-5770-4cfe-88d1-9d4857c322e6',
-          });
+          if (snap.data()) {
+            setChatConfig({
+              userSecret: authUser.uid,
+              avatar: snap.data().avatar,
+              userName: snap.data().userName,
+              projectID: '12a69a14-5770-4cfe-88d1-9d4857c322e6',
+            });
+          }
         });
     }
   }, [authUser, setChatConfig]);

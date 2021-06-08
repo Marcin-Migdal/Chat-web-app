@@ -1,17 +1,13 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { fb } from 'service';
+import { useState } from 'react';
 import { Form, Formik } from 'formik';
 import { FormField } from 'components';
-
+import { useHistory } from 'react-router';
 import { defaultValues, validationSchema } from './formikConfig';
+
 export const Signup = () => {
   const history = useHistory();
   const [serverError, setServerError] = useState('');
-
-  const redirect = () => {
-    history.push('login');
-  };
 
   const signup = ({ email, userName, password }, { setSubmitting }) => {
     fb.auth
@@ -73,7 +69,7 @@ export const Signup = () => {
 
             <div className="auth-link-container">
               Already have an account?
-              <p onClick={redirect} className="auth-link">
+              <p onClick={() => history.push('login')} className="auth-link">
                 Log In!
               </p>
             </div>

@@ -9,10 +9,6 @@ export const Login = () => {
   const history = useHistory();
   const [serverError, setServerError] = useState('');
 
-  const redirect = () => {
-    history.push('signup');
-  };
-
   const login = ({ email, password }, { setSubmitting }) => {
     fb.auth
       .signInWithEmailAndPassword(email, password)
@@ -50,7 +46,7 @@ export const Login = () => {
             <FormField label="Password" inputName="password" type="password" />
             <div className="auth-link-container">
               Don't have an account?
-              <p onClick={redirect} className="auth-link">
+              <p onClick={() => history.push('signup')} className="auth-link">
                 Sign Up!
               </p>
             </div>
