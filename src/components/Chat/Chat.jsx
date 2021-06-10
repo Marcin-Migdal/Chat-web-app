@@ -27,8 +27,8 @@ export const Chat = () => {
   const handleNewChat = chat => {
     if (chat.admin.username === chatConfig.userName) {
       selectChatClick(chat);
-      setMyChats([...myChats, chat].sort(sortChats));
     }
+    setMyChats([...myChats, chat].sort(sortChats));
   };
 
   const handleDeleteChat = deletedChat => {
@@ -41,13 +41,17 @@ export const Chat = () => {
   };
 
   const handleNewMessage = (chatId, message) => {
-    if (selectedChat && chatId === selectedChat.id) {
+    const chatThatMessageBelongsTo = myChats.find(c => c.id === chatId);
+    if (!chatThatMessageBelongsTo) {
+      return;
+    }
+
+    if (selectedChat && selectedChat.id === chatId) {
       setSelectedChat({
         ...selectedChat,
         messages: [...selectedChat.messages, message],
       });
     }
-    const chatThatMessageBelongsTo = myChats.find(c => c.id === chatId);
     const filteredChats = myChats.filter(chat => chat.id !== chatId);
     const updatedChat = {
       ...chatThatMessageBelongsTo,
