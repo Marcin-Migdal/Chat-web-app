@@ -8,6 +8,7 @@ export const ChatProvider = ({ children, authUser }) => {
   const [myChats, setMyChats] = useState();
   const [chatConfig, setChatConfig] = useState();
   const [selectedChat, setSelectedChat] = useState();
+  const [chatInputText, setChatInputText] = useState('');
 
   const createChatClick = () => {
     newChat(chatConfig, { title: '' });
@@ -30,6 +31,7 @@ export const ChatProvider = ({ children, authUser }) => {
 
   const selectChatClick = chat => {
     getMessages(chatConfig, chat.id, (chatId, messages) => {
+      setChatInputText('');
       setSelectedChat({
         ...chat,
         messages,
@@ -67,6 +69,8 @@ export const ChatProvider = ({ children, authUser }) => {
         selectChatClick,
         deleteChatClick,
         createChatClick,
+        chatInputText,
+        setChatInputText,
       }}
     >
       {children}
@@ -85,6 +89,8 @@ export const useChat = () => {
     selectChatClick,
     deleteChatClick,
     createChatClick,
+    chatInputText,
+    setChatInputText,
   } = useContext(ChatContext);
 
   return {
@@ -97,5 +103,7 @@ export const useChat = () => {
     selectChatClick,
     deleteChatClick,
     createChatClick,
+    chatInputText,
+    setChatInputText,
   };
 };

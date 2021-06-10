@@ -16,13 +16,8 @@ export const ChatToolbar = () => {
           {joinUserNames(chatConfig, selectedChat, 100)}
         </div>
 
-        <div className="add-user-icon">
-          <Icon
-            color="grey"
-            name="user plus"
-            size="large"
-            onClick={() => setSearching(!searching)}
-          />
+        <div className="add-user-icon" onClick={() => setSearching(!searching)}>
+          <Icon color="grey" name="user plus" size="large" />
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { sendMessage } from 'react-chat-engine';
 import { ImageUpload } from 'components';
 import { Icon } from 'semantic-ui-react';
@@ -6,16 +6,12 @@ import { useChat } from 'context';
 import './ChatInput.css';
 
 export const ChatInput = () => {
-  const { chatConfig, selectedChat } = useChat();
-  const [chatInputText, setChatInputText] = useState('');
+  const { chatConfig, selectedChat, chatInputText, setChatInputText } =
+    useChat();
   const [imageModalOpen, setImageModalOpen] = useState(false);
 
   const inputRef = useRef(null);
   const [image, setImage] = useState();
-
-  useEffect(() => {
-    setChatInputText('');
-  }, [selectedChat]);
 
   const sendChatMessage = () => {
     if (selectedChat && chatInputText) {
@@ -58,6 +54,11 @@ export const ChatInput = () => {
     );
   };
 
+  const onCloseModal = () => {
+    setImage(null);
+    setImageModalOpen(false);
+  };
+
   return (
     <>
       <div className="chat-controls">
@@ -88,10 +89,7 @@ export const ChatInput = () => {
         <ImageUpload
           file={image}
           onSubmit={imageUploadSubmit}
-          close={() => {
-            setImage(null);
-            setImageModalOpen(false);
-          }}
+          close={() => onCloseModal}
         />
       )}
     </>
