@@ -1,5 +1,5 @@
+import { isTyping, sendMessage } from 'react-chat-engine';
 import { useRef, useState } from 'react';
-import { sendMessage } from 'react-chat-engine';
 import { ImageUpload } from 'components';
 import { Icon } from 'semantic-ui-react';
 import { useChat } from 'context';
@@ -12,6 +12,7 @@ export const ChatInput = () => {
 
   const inputRef = useRef(null);
   const [image, setImage] = useState();
+  const [timeOut, setTimeOut] = useState();
 
   const sendChatMessage = () => {
     if (selectedChat && chatInputText) {
@@ -59,6 +60,19 @@ export const ChatInput = () => {
     setImageModalOpen(false);
   };
 
+  const handleOnChange = e => {
+    setChatInputText(e.target.value);
+
+    if (!timeOut) {
+      setTimeOut(
+        setTimeout(() => {
+          isTyping(chatConfig, selectedChat.id);
+          setTimeOut();
+        }, 1250),
+      );
+    }
+  };
+
   return (
     <>
       <div className="chat-controls">
@@ -70,7 +84,7 @@ export const ChatInput = () => {
           value={chatInputText}
           className="chat-input"
           placeholder="Send a message"
-          onChange={e => setChatInputText(e.target.value)}
+          onChange={handleOnChange}
           onKeyPress={e => e.key === 'Enter' && sendChatMessage()}
         />
         <div onClick={sendChatMessage} className="send-message-icon">
@@ -89,7 +103,7 @@ export const ChatInput = () => {
         <ImageUpload
           file={image}
           onSubmit={imageUploadSubmit}
-          close={() => onCloseModal}
+          close={onCloseModal}
         />
       )}
     </>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const useScrollToBottom = (trigger, className) => {
+export const useScrollToBottom = (className, ...trigger) => {
   useEffect(() => {
     if (!!trigger) {
       Promise.all(
@@ -14,5 +14,5 @@ export const useScrollToBottom = (trigger, className) => {
           document.getElementsByClassName(className)[0].scrollTop = document.getElementsByClassName(className)[0].scrollHeight;
         });
     }
-  }, [trigger, className]);
+  }, [className, trigger]);
 };
