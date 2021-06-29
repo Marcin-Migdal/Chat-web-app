@@ -9,6 +9,7 @@ export const ChatProvider = ({ children, authUser }) => {
   const [chatConfig, setChatConfig] = useState();
   const [selectedChat, setSelectedChat] = useState();
   const [chatInputText, setChatInputText] = useState('');
+  const [isTyping, setIsTyping] = useState();
 
   const createChatClick = () => {
     newChat(chatConfig, { title: '' });
@@ -71,6 +72,8 @@ export const ChatProvider = ({ children, authUser }) => {
         createChatClick,
         chatInputText,
         setChatInputText,
+        isTyping,
+        setIsTyping,
       }}
     >
       {children}
@@ -91,6 +94,8 @@ export const useChat = () => {
     createChatClick,
     chatInputText,
     setChatInputText,
+    isTyping,
+    setIsTyping,
   } = useContext(ChatContext);
 
   return {
@@ -105,5 +110,7 @@ export const useChat = () => {
     createChatClick,
     chatInputText,
     setChatInputText,
+    isTyping,
+    setIsTyping,
   };
 };

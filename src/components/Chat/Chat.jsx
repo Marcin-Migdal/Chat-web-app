@@ -12,8 +12,9 @@ export const Chat = () => {
     chatConfig,
     setChatConfig,
     selectedChat,
-    selectChatClick,
     setSelectedChat,
+    selectChatClick,
+    setIsTyping,
   } = useChat();
 
   useEffect(() => {
@@ -73,6 +74,7 @@ export const Chat = () => {
             onNewChat={chat => handleNewChat(chat)}
             onDeleteChat={deletedChat => handleDeleteChat(deletedChat)}
             onNewMessage={(chatId, msg) => handleNewMessage(chatId, msg)}
+            onTyping={(chatID, username) => setIsTyping({ chatID, username })}
           />
         </div>
       )}
