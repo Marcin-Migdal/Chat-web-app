@@ -1,4 +1,8 @@
 .chat-list-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 3rem;
   margin-left: 10px;
 }
 

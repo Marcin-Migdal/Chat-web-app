@@ -1,11 +1,12 @@
 import { LeftRail, ChatToolbar, ChatInput, MessageList } from 'components';
 import { getChats, ChatEngine } from 'react-chat-engine';
+import { useEffect, useState } from 'react';
 import { sortChats } from 'helpers';
 import { useChat } from 'context';
-import { useEffect } from 'react';
 import './Chat.css';
 
 export const Chat = () => {
+  const [timeOut, setTimeOut] = useState();
   const {
     myChats,
     setMyChats,
@@ -61,6 +62,20 @@ export const Chat = () => {
     setMyChats([...filteredChats, updatedChat].sort(sortChats));
   };
 
+  const handleTyping = (chatID, username) => {
+    if (username !== chatConfig.userName) {
+      setIsTyping({ chatID, username });
+      clearTimeout(timeOut);
+
+      setTimeOut(
+        setTimeout(() => {
+          setIsTyping();
+          setTimeOut();
+        }, 2500),
+      );
+    }
+  };
+
   return (
     <>
       <LeftRail />
@@ -74,7 +89,7 @@ export const Chat = () => {
             onNewChat={chat => handleNewChat(chat)}
             onDeleteChat={deletedChat => handleDeleteChat(deletedChat)}
             onNewMessage={(chatId, msg) => handleNewMessage(chatId, msg)}
-            onTyping={(chatID, username) => setIsTyping({ chatID, username })}
+            onTyping={(chatID, username) => handleTyping(chatID, username)}
           />
         </div>
       )}

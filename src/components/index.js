@@ -13,3 +13,4 @@ export * from './ChatInput';
 export * from './MessageList';
 export * from './ImageUpload';
 export * from './RailHeader';
+export * from './IsTypingComponent';

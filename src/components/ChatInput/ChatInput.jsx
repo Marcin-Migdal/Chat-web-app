@@ -12,7 +12,7 @@ export const ChatInput = () => {
 
   const inputRef = useRef(null);
   const [image, setImage] = useState();
-  const [typingTimeOut, setTypingTimeOut] = useState(false);
+  const [timeOut, setTimeOut] = useState();
 
   const sendChatMessage = () => {
     if (selectedChat && chatInputText) {
@@ -63,12 +63,13 @@ export const ChatInput = () => {
   const handleOnChange = e => {
     setChatInputText(e.target.value);
 
-    if (!typingTimeOut) {
-      isTyping(chatConfig, selectedChat.id);
-      setTypingTimeOut(true);
-      setTimeout(() => {
-        setTypingTimeOut(false);
-      }, 1500);
+    if (!timeOut) {
+      setTimeOut(
+        setTimeout(() => {
+          isTyping(chatConfig, selectedChat.id);
+          setTimeOut();
+        }, 1250),
+      );
     }
   };
 

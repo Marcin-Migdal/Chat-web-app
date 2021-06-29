@@ -11,6 +11,7 @@ export const ChatList = () => {
     selectedChat,
     selectChatClick,
     deleteChatClick,
+    isTyping,
   } = useChat();
 
   return (
@@ -33,11 +34,13 @@ export const ChatList = () => {
                 <ChatListItemContent
                   username={notMe(chatConfig, chat)}
                   chat={chat}
+                  isTyping={isTyping}
                 />
               ) : (
                 <ChatListItemContent
                   username={joinUserNames(chatConfig, chat)}
                   chat={chat}
+                  isTyping={isTyping}
                 />
               )}
             </div>

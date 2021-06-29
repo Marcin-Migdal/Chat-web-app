@@ -1,12 +1,12 @@
-import { ChatAvatar } from 'components/ChatAvatar/ChatAvatar';
-import { useChat } from 'context/ChatContext';
+import { ChatAvatar, IsTypingComponent } from 'components';
+import { useChat } from 'context';
 import { groupMessages } from 'helpers';
 import { useScrollToBottom } from 'hooks';
 import './MessageList.css';
 
 export const MessageList = () => {
   const { selectedChat, chatConfig, isTyping } = useChat();
-  useScrollToBottom(selectedChat, 'chat-messages');
+  useScrollToBottom('chat-messages', [selectedChat, isTyping]);
 
   return (
     <div className="chat-messages">
@@ -61,13 +61,14 @@ export const MessageList = () => {
               </div>
             );
           })}
-          {isTyping && (
-            <div className="chat-message left">
+          {isTyping && isTyping.chatID === selectedChat.id && (
+            <div className="is-typing-container">
               <ChatAvatar
                 className="message-avatar"
                 username={isTyping.username}
                 chat={selectedChat}
               />
+              <IsTypingComponent />
             </div>
           )}
         </>
